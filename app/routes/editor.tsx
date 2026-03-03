@@ -10,7 +10,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function EditorPage() {
   return (
-    <div className="p-8 text-white bg-neutral-800 min-h-screen">
+    <div className="p-10 text-white min-h-screen">
       <h1 className="text-2xl font-bold">Таб-редактор</h1>
       <p className="mt-4 text-gray-400">Тут скоро буде AlphaTab полотно...</p>
     </div>

@@ -1,10 +1,14 @@
-import LayoutHeader from "./components/LayoutHeader";
+import { Outlet } from "react-router";
+import Dashboard from "./components/Dashboard/Dashboard";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout() {
   return (
-    <div className="bg-neutral-950">
-        <LayoutHeader/>
-        {children}
+    <div className="flex min-h-screen">
+      <Dashboard />
+      {/* main content area where child routes render */}
+      <main className="flex-1">
+        <Outlet />
+      </main>
     </div>
   );
 }
