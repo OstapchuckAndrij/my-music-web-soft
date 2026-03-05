@@ -1,4 +1,5 @@
-import { HomeIcon, NotesIcon, SearchMusicIcon } from "../../shared/icons/Icons";
+import { EditIcon, NotesIcon, SearchMusicIcon } from "../../shared/icons/Icons";
+import { HomeIcon } from "lucide-react";
 import { Settings, User } from "lucide-react";
 
 export enum ButtonType {
@@ -33,9 +34,16 @@ export const dashboardItems: DashboardItem[] = [
   {
     id: "editor",
     type: ButtonType.NAV,
-    label: "Editor",
-    icon: <NotesIcon />,
+    label: "Create notes",
+    icon: <EditIcon />,
     to: "/editor",
+  },
+  {
+    id: "library",
+    type: ButtonType.NAV,
+    label: "Own library",
+    icon: <NotesIcon />,
+    to: "/library",
   },
   {
     id: "settings",

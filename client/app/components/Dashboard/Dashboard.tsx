@@ -2,7 +2,7 @@
 import { useState } from "react";
 //Components
 import { dashboardItems, ButtonType } from "./DashboadFactory";
-import { ChevronRight, ChevronLeft, HomeIcon } from "lucide-react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
 import DashboardButton from "./DashboardButton";
 //Hooks
 import { useNavigate } from "react-router";
@@ -30,6 +30,7 @@ export default function Dashboard() {
       <div className="mb-4 flex flex-row items-center justify-between">
         {/* Кнопка перемикання (Toggle) */}
         <button
+          key={"21313r2x"}
           onClick={() => setIsExpanded(!isExpanded)}
           className=" p-3 hover:bg-neutral-800 rounded-lg self-center"
         >

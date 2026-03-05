@@ -86,7 +86,7 @@ export const SearchMusicIcon = ({ className }: IconProps) => {
 
 //../assets/music3.svg
 
-export const HomeIcon = ({ className }: IconProps) => {
+export const EditIcon = ({ className }: IconProps) => {
   // The SVG originally included a hard-coded `class` attribute
   // (`iconify iconify--emojione`) that conflicted with React's
   // `className` prop. During client-side navigation the render tree
