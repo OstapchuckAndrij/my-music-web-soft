@@ -1,4 +1,4 @@
-import { EditIcon, NotesIcon, SearchMusicIcon } from "../../shared/icons/Icons";
+import { EditIcon, NotesIcon, SearchMusicIcon } from "../../icons/Icons";
 import { HomeIcon } from "lucide-react";
 import { Settings, User } from "lucide-react";
 

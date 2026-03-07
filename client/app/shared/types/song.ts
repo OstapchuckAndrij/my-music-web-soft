@@ -1,5 +1,5 @@
 export interface Song {
-  id: number;
+  id: string;
   title: string;
   difficulty: string;
   tab_url: string;
@@ -7,8 +7,4 @@ export interface Song {
     name: string | null;
     image_url: string | null;
   };
-}
-
-export interface LoaderResponse {
-  songs: Song[];
 }

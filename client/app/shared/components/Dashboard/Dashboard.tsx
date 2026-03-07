@@ -30,14 +30,15 @@ export default function Dashboard() {
       <div className="mb-4 flex flex-row items-center justify-between">
         {/* Кнопка перемикання (Toggle) */}
         <button
-          key={"21313r2x"}
+          key={"toggle-button"}
           onClick={() => setIsExpanded(!isExpanded)}
-          className=" p-3 hover:bg-neutral-800 rounded-lg self-center"
+          className="cursor-pointer p-3 hover:bg-neutral-800 rounded-lg self-center"
         >
           {isExpanded ? <ChevronLeft /> : <ChevronRight />}
         </button>
 
         <DashboardButton
+          key={homeButton?.id}
           icon={homeButton?.icon}
           isExpanded={isExpanded}
           isFullExpanded={true}
@@ -52,6 +53,7 @@ export default function Dashboard() {
             .filter((item) => item.type === ButtonType.NAV)
             .map((item) => (
               <DashboardButton
+                key={item.id}
                 icon={item.icon}
                 label={item.label}
                 isExpanded={isExpanded}

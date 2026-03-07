@@ -1,7 +1,7 @@
-import { supabase } from "~/utils/supabase";
-import type { Song } from "~/types/song";
+import { supabase } from "~/shared/utils/supabase";
+import type { Song } from "~/shared/types/song";
 
-export async function fetchSongs(): Promise<Song[]> {
+const fetchSongs: () => Promise<Song[]> = async () => {
   const { data: songs, error } = await supabase
     .from("songs")
     .select(
@@ -21,6 +21,16 @@ export async function fetchSongs(): Promise<Song[]> {
   if (error) {
     throw new Error(`Database error: ${error.message}`);
   }
-
   return (songs as unknown as Song[]) || [];
-}
+};
+
+const fetchSongById: (id: string) => Promise<Song | null> = async (id) => {
+  const { data: song, error } = await supabase
+    .from("songs")
+    .select("*, artists(name)")
+    .eq("id", id)
+    .single();
+  return (song as unknown as Song) || null;
+};
+
+export { fetchSongs, fetchSongById };
