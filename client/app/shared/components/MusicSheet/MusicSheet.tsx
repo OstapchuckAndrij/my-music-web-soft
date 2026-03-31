@@ -2,6 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import * as alphaTab from "@coderline/alphatab";
 //Types
 import type { Song } from "~/shared/types/song";
+import {
+  type SongSettings,
+  defaultSongSettings,
+} from "~/shared/types/songSettings.config";
 
 interface TabSheetProps {
   song: Song;
@@ -14,20 +18,9 @@ const TabSheet: React.FC<TabSheetProps> = ({ song }) => {
   useEffect(() => {
     if (!containerRef.current || !song) return;
     // Ініціалізація AlphaTab
-    const settings = {
-      file: song.tab_url, // Посилання з твоєї бази!
-      core: {
-        fontDirectory: "/font/",
-        enableCursor: true,
-      },
-      player: {
-        enablePlayer: true,
-        soundFont:
-          "https://cdn.jsdelivr.net/npm/@coderline/alphatab@latest/dist/soundfont/sonivox.sf2",
-      },
-      render: {
-        cursorType: 2,
-      },
+    const settings: SongSettings = {
+      ...defaultSongSettings,
+      file: song.tab_url,
     };
 
     const at = new alphaTab.AlphaTabApi(containerRef.current, settings);
@@ -63,7 +56,7 @@ const TabSheet: React.FC<TabSheetProps> = ({ song }) => {
       </div>
 
       {/* Контейнер, де AlphaTab малюватиме ноти */}
-      <div className="flex-1 bg-white overflow-y-auto">
+      <div className="width-fullc bg-white overflow-y-auto">
         <div ref={containerRef}></div>
       </div>
     </div>
