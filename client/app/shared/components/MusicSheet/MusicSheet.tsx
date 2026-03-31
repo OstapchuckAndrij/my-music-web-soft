@@ -19,6 +19,7 @@ const TabSheet: React.FC<TabSheetProps> = ({ song }) => {
       core: {
         fontDirectory: "/font/",
         enableCursor: true,
+        scriptFile: "/alphaTab.worker.mjs",
       },
       player: {
         enablePlayer: true,
@@ -63,7 +64,7 @@ const TabSheet: React.FC<TabSheetProps> = ({ song }) => {
       </div>
 
       {/* Контейнер, де AlphaTab малюватиме ноти */}
-      <div className="flex-1 bg-white overflow-y-auto">
+      <div className="width-fullc bg-white overflow-y-auto">
         <div ref={containerRef}></div>
       </div>
     </div>
