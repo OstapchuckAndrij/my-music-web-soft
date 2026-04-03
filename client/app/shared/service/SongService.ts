@@ -1,5 +1,15 @@
 import { fetchSongs, fetchSongById } from "~/lib/supabase-client";
-import type { Song } from "~/shared/types/song";
+
+export interface Song {
+  id: string;
+  title: string;
+  difficulty: string;
+  tab_url: string;
+  artists: {
+    name: string | null;
+    image_url: string | null;
+  };
+}
 
 const getSongsList: () => Promise<Song[]> = async () => {
   try {

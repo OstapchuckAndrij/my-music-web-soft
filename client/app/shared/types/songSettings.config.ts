@@ -6,7 +6,7 @@ export const defaultSongSettings = {
   },
   player: {
     enablePlayer: true,
-    soundFont: "/soundfont/sonivox.sf2",
+    soundFont: "/soundfont/sonivox.sf3",
   },
   render: {
     cursorType: 2,

@@ -2,7 +2,7 @@
 import { getSongsList, getSongById } from "../shared/service/SongService";
 import { useParams } from "react-router";
 //types
-import { type Song } from "../shared/types/song";
+import { type Song } from "../shared/service/SongService";
 //components
 import TabsList from "../shared/components/Tabs/TabsList";
 import TabSheet from "../shared/components/MusicSheet/MusicSheet";

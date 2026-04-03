@@ -1,10 +1,45 @@
-export interface Song {
-  id: string;
-  title: string;
-  difficulty: string;
-  tab_url: string;
-  artists: {
-    name: string | null;
-    image_url: string | null;
-  };
+// State для редагування табулатури
+
+interface CursorPosition {
+  trackIdx: number;
+  measureIdx: number;
+  beatIdx: number;
+  stringIdx: number; // 0 - перша струна (тонка E), 5 - шоста (товста E)
 }
+
+interface SongState {
+  title: string;
+  tempo: number;
+  tracks: Track[];
+  cursor: CursorPosition; // Поточне виділення
+}
+
+interface Track {
+  id: string;
+  name: string;
+  instrument: string; // напр. "steel-guitar"
+  tuning: string[];
+  measures: Measure[];
+}
+
+interface Measure {
+  id: string;
+  beats: Beat[];
+  clef?: string; // "tab" або "treble"
+  timeSignature?: { upper: number; lower: number };
+}
+
+interface Beat {
+  id: string;
+  duration: string;
+  notes: Note[]; // Якщо порожньо — це пауза або порожній біт
+}
+
+interface Note {
+  string: number;
+  fret: number;
+  vibrato?: boolean;
+  slide?: "up" | "down" | "none";
+}
+
+export type { SongState, CursorPosition, Track, Measure, Beat, Note };

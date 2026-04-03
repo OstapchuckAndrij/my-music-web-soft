@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import * as alphaTab from "@coderline/alphatab";
 //Types
-import type { Song } from "~/shared/types/song";
+import type { Song } from "~/shared/service/SongService";
 import {
   type SongSettings,
   defaultSongSettings,
@@ -32,8 +32,14 @@ const TabSheet: React.FC<TabSheetProps> = ({ song }) => {
   }, [song]);
 
   return (
-    <div className="flex flex-col h-screen bg-white">
+    <div className="flex max-w-full overflow-hidden flex-col h-screen">
       {/* Панель керування */}
+
+      {/* Контейнер, де AlphaTab малюватиме ноти */}
+      <div className="w-full min-w-0 bg-white overflow-y-auto">
+        <div ref={containerRef}></div>
+      </div>
+
       <div className="bg-neutral-900 p-4 text-white flex justify-between items-center">
         <div>
           <h1 className="text-xl font-bold">{song.title}</h1>
@@ -53,11 +59,6 @@ const TabSheet: React.FC<TabSheetProps> = ({ song }) => {
             Stop
           </button>
         </div>
-      </div>
-
-      {/* Контейнер, де AlphaTab малюватиме ноти */}
-      <div className="width-fullc bg-white overflow-y-auto">
-        <div ref={containerRef}></div>
       </div>
     </div>
   );
