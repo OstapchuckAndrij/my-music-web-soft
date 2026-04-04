@@ -22,7 +22,7 @@ export function ErrorBoundary() {
   return (
     <div className="flex min-h-screen">
       <Dashboard />
-      <main className="flex-1 p-6 bg-neutral-800 text-white flex items-center justify-center">
+      <main className="w-full p-6 bg-neutral-800 text-white flex items-center justify-center">
         <div className="text-center max-w-md">
           <h1 className="text-2xl font-bold mb-4">{title}</h1>
           <p className="mb-4">{message}</p>
@@ -53,7 +53,7 @@ export default function Layout() {
   return (
     <div className="flex min-h-screen">
       <Dashboard />
-      <main className="flex-1">
+      <main className="w-full">
         <Outlet />
       </main>
     </div>

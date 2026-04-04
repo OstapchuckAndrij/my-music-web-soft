@@ -43,9 +43,9 @@ export const SearchMusicIcon = ({ className }: IconProps) => {
       version="1.1"
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 496 496"
-      xml:space="preserve"
+      xmlSpace="preserve"
     >
       <g>
         <g>
@@ -98,7 +98,7 @@ export const EditIcon = ({ className }: IconProps) => {
       className={className}
       viewBox="0 0 64 64"
       xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
       aria-hidden="true"
       role="img"
       fill="currentColor"

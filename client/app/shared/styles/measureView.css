@@ -1,0 +1,19 @@
+@layer components {
+  /*Стилі для табулатури MeasureView*/
+  .MeasureView .vf-tabnote rect,
+  .MeasureView .vf-stavenote rect {
+    @apply fill-neutral-900;
+  }
+  .MeasureView .vf-stavebarline rect {
+    @apply fill-amber-50;
+  }
+  .MeasureView text {
+    @apply fill-amber-50;
+  }
+  .MeasureView .vf-tabnote text {
+    @apply text-base;
+  }
+  .MeasureView path {
+    @apply stroke-amber-50 opacity-20;
+  }
+}

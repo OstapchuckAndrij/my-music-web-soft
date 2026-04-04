@@ -1,4 +1,4 @@
-import { type Song } from "../../types/song";
+import { type Song } from "../../service/SongService";
 //components
 import TabCard from "./TabCard";
 //utils
