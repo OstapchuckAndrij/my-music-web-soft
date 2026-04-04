@@ -10,6 +10,7 @@ interface CursorPosition {
 interface SongState {
   title: string;
   tempo: number;
+  activeTrackIdx: number;
   tracks: Track[];
   cursor: CursorPosition; // Поточне виділення
 }
@@ -27,6 +28,7 @@ interface Measure {
   beats: Beat[];
   clef?: string; // "tab" або "treble"
   timeSignature?: { upper: number; lower: number };
+  bpm?: number;
 }
 
 interface Beat {

@@ -3,6 +3,7 @@ import { type SongState } from "../../types/song";
 const initialState: SongState = {
   title: "New Composition",
   tempo: 120,
+  activeTrackIdx: 0,
   // Активна позиція курсора
   cursor: {
     trackIdx: 0,
@@ -26,13 +27,12 @@ const initialState: SongState = {
               notes: [
                 { string: 6, fret: 5 },
                 { string: 5, fret: 7 },
-                { string: 5, fret: 7 },
               ],
               duration: "q",
             },
-            { id: "b2", notes: [{ string: 5, fret: 7 }], duration: "q" },
+            { id: "b2", notes: [], duration: "q" },
             { id: "b3", notes: [], duration: "q" },
-            { id: "b4", notes: [], duration: "q" },
+            { id: "b4", notes: [{ string: 3, fret: 3 }], duration: "q" },
           ],
         },
       ],

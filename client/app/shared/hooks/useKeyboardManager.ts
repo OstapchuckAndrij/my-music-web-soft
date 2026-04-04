@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setCursor, updateNoteAtCursor } from "../store/reducers/songSlice";
-import { useAppSelector } from "./reduxFactory";
+import { useAppSelector } from "./useReduxFactory";
 
 const useKeyboardManager = () => {
   const dispatch = useDispatch();

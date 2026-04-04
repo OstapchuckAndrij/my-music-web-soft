@@ -1,0 +1,28 @@
+@layer components {
+  .at-cursor-bar {
+    @apply bg-emerald-300 opacity-5 rounded-md;
+    /* 1. Дозволяємо alphaTab самому керувати позицією (не перебиваємо transform повністю!) */
+  }
+  /*Стилі для табулатури alphaTab*/
+  .at-cursor-beat {
+    @apply bg-emerald-500;
+  }
+  .at-selection {
+    background: rgba(59, 130, 246, 0.2) !important;
+  }
+
+  .at-surface {
+    @apply bg-neutral-900 text-amber-50;
+  }
+
+  .alphaTab rect {
+    @apply opacity-20 fill-amber-50;
+  }
+
+  .alphaTab text {
+    @apply fill-neutral-400;
+  }
+  .alphaTab g > text {
+    @apply fill-amber-100 align-middle;
+  }
+}

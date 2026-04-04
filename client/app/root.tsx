@@ -29,7 +29,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="w-screen h-screen bg-neutral-800">
+      <body className="w-screen h-screen">
         <Provider store={store}>{children}</Provider>
         <ScrollRestoration />
         <Scripts />
