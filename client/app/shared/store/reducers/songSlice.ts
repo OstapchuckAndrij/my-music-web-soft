@@ -18,8 +18,8 @@ const songSlice = createSlice({
     addMeasure: (state, action: PayloadAction<void>) => {
       const track = state.tracks[state.activeTrackIdx];
       const newMeasure = {
-        id: `m${Date.now()}`,
-        beats: [],
+        id: `m-${Date.now()}`,
+        beats: [{ id: `b-${Date.now()}`, notes: [], duration: "w" }],
       };
       track.measures.push(newMeasure);
     },
@@ -46,5 +46,6 @@ const songSlice = createSlice({
   },
 });
 
-export const { setCursor, updateNoteAtCursor, selectTrack } = songSlice.actions;
+export const { setCursor, updateNoteAtCursor, selectTrack, addMeasure } =
+  songSlice.actions;
 export default songSlice.reducer;

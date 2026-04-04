@@ -50,7 +50,7 @@ export default function DashboardButton({
       {!isExpanded && label && (
         <span
           className="
-            absolute left-full ml-4 px-2 py-1 bg-gray-800 text-xs 
+            absolute left-full ml-4 px-2 py-1 z-20 bg-gray-800 text-xs 
             rounded opacity-0 group-hover:opacity-100 transition-opacity 
             pointer-events-none whitespace-nowrap z-10
           "

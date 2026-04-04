@@ -1,17 +1,45 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as VF from "vexflow";
+//Redux
+import { addMeasure } from "../../store/reducers/songSlice";
+import { useAppSelector } from "../../hooks/useReduxFactory";
+import { useDispatch } from "react-redux";
+//types
 import { type Measure } from "../../types/song";
+//components
+import MeasureCursor from "./MeasureCursor";
+import { Plus } from "lucide-react";
+//utils
+import { calculateMeasureWidth } from "../../utils/measureUtils";
 
 interface MeasureViewProps {
   measure: Measure;
+  mIndex: number;
   tuning?: string[]; // Додайте це, якщо хочете показувати налаштування струн
   isFirst: boolean;
   isLast?: boolean;
 }
 
-const MeasureView: React.FC<MeasureViewProps> = ({ measure, isFirst }) => {
+const MeasureView: React.FC<MeasureViewProps> = ({
+  measure,
+  mIndex,
+  isFirst,
+  isLast,
+}) => {
+  const dispatch = useDispatch();
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const { cursor } = useAppSelector((state) => state.song);
+  const [cursorRect, setCursorRect] = useState({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+  });
+  const isCurrentMeasure = cursor.measureIdx === mIndex;
   const beats = measure.beats;
+
+  const measureWidth = calculateMeasureWidth(beats.length, isFirst);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -24,12 +52,12 @@ const MeasureView: React.FC<MeasureViewProps> = ({ measure, isFirst }) => {
       containerRef.current,
       VF.Renderer.Backends.SVG,
     );
-    renderer.resize(300, 200);
+    renderer.resize(measureWidth, 200);
     const context = renderer.getContext();
 
     // 3. Створюємо табулатурний стан
     // x=0, y=40 (дамо трохи місця зверху), ширина=300
-    const stave = new VF.TabStave(0, 40, 300);
+    const stave = new VF.TabStave(0, 40, measureWidth);
     if (isFirst) {
       stave.addTabGlyph();
     }
@@ -55,17 +83,14 @@ const MeasureView: React.FC<MeasureViewProps> = ({ measure, isFirst }) => {
           });
           return note;
         } else {
-          const note = new VF.TabNote({
+          return new VF.TabNote({
             positions: beat.notes.map((n) => ({
               str: n.string,
-              fret: n.fret.toString(), // ВАЖЛИВО: має бути string
+              fret: n.fret.toString(),
+              drawStem: true, // Для табулатури зазвичай не малюємо стебла
             })),
             duration: beat.duration,
-          });
-
-          // Прив'язуємо кожну ноту до стану, щоб вона знала свої Y-координати
-          note.setStave(stave);
-          return note;
+          }).setStave(stave);
         }
       });
 
@@ -75,19 +100,46 @@ const MeasureView: React.FC<MeasureViewProps> = ({ measure, isFirst }) => {
       voice.addTickables(vfNotes);
 
       // Форматуємо (розраховуємо X-координати)
-      new VF.Formatter().joinVoices([voice]).format([voice], 250); // 250 - корисна ширина
+      const padding = isFirst ? 80 : 20;
+      new VF.Formatter()
+        .joinVoices([voice])
+        .format([voice], measureWidth - padding);
 
       // Малюємо
       voice.draw(context, stave);
+      if (vfNotes.length > 0 && isCurrentMeasure) {
+        const activeNote = vfNotes[cursor.beatIdx];
+        if (activeNote) {
+          const x = activeNote.getAbsoluteX();
+          const staveTop = stave.getYForLine(0);
+          const staveBottom = stave.getYForLine(5);
+          const staveHeight = staveBottom - staveTop;
+
+          setCursorRect({
+            x: x - 15,
+            y: staveTop - 5, // Трохи вище верхньої лінії
+            width: 30,
+            height: staveHeight + 10, // Трохи нижче нижньої лінії
+          });
+        }
+      }
     }
-  }, [beats, isFirst]);
+  }, [beats, isFirst, isCurrentMeasure, cursor.beatIdx, measureWidth]);
 
   return (
-    <div className="flex flex-wrap items-center gap-2 p-2">
+    <div className="flex relative items-center gap-2">
       <div ref={containerRef} className="MeasureView" />
-      <button className="mt-13 px-4 py-2 bg-neutral-800 text-emerald-500 border border-emerald-500/30 rounded-md hover:bg-emerald-500/10">
-        +
-      </button>
+      {isCurrentMeasure && (
+        <MeasureCursor cursorRect={cursorRect} cursor={cursor} />
+      )}
+      {isLast && (
+        <button
+          className="mt-13 px-2 py-2 opacity-0 hover:opacity-100 text-emerald-500"
+          onClick={() => dispatch(addMeasure())}
+        >
+          <Plus size={42} />
+        </button>
+      )}
     </div>
   );
 };

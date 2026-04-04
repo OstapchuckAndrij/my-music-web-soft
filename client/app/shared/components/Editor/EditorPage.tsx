@@ -14,13 +14,14 @@ const DebugUI: React.FC = () => {
 
   return (
     <div>
-      <div>
+      <div className="sticky top-0 z-10">
         <TrackSelector />
       </div>
-      <div className="flex flex-wrap overflow-y-hidden ">
+      <div className="flex flex-wrap overflow-y-auto">
         {currentTrack?.measures.map((measure, idx) => (
           <MeasureView
             key={measure.id}
+            mIndex={idx}
             measure={measure}
             isFirst={idx === 0}
             isLast={idx === currentTrack.measures.length - 1}
